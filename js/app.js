@@ -70,7 +70,12 @@ todoBtn.addEventListener('click', function(e){
 
         todoLi.innerText = userInput; 
 
-        // * 2.3. Create Check and Trash Buttons
+        // * 2.3. Create Edit, Check and Trash Buttons
+        // * Edit Button
+        const editBtn   = document.createElement('button');
+        editBtn.className = 'edit';
+        editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+        
         // * Check Button
         const checkBtn   = document.createElement('button');
         checkBtn.className = 'check';
@@ -81,11 +86,13 @@ todoBtn.addEventListener('click', function(e){
         trashBtn.className = 'trash';
         trashBtn.innerHTML = '<i class="fas fa-trash"></i>';
 
-        // * Add/Append the list under the todo DIV
-        // * 2.4. Insert these items into todo DIV 
+        // * Add/Append the list and buttons under the todo DIV
+        // * 2.4. Insert items into todo DIV 
         todoDiv.appendChild(todoLi);
         todoListul.appendChild(todoDiv);
 
+        // * Insert buttons into todo DIV
+        todoDiv.appendChild(editBtn);
         todoDiv.appendChild(checkBtn);
         todoDiv.appendChild(trashBtn);
         
@@ -95,7 +102,7 @@ todoBtn.addEventListener('click', function(e){
     }    
 }); 
 
-// * 4. Add Event Listener to Check and Trash button and make these functional
+// * 4. Add Event Listener to Check, Trash & Edit button and make these functional
 todoListul.addEventListener('click', function(e){
     e.preventDefault()
     const clickedEl = e.target;
@@ -110,14 +117,39 @@ todoListul.addEventListener('click', function(e){
         let flag = true;
         todoDiv.className += ' drop-effect';
 
-            todoDiv.addEventListener('transitionend', function(){
-                if(flag){
-                    todoDiv.remove();
-                    checkList();
-                }
-                flag = false;
-            });
+        todoDiv.addEventListener('transitionend', function(){
+            if(flag){
+                todoDiv.remove();
+                checkList();
+            }
+            flag = false;
+        });
+    }else if(clickedEl.className == 'edit'){
+        clickedEl.innerHTML = '<i class="fas fa-save"></i>';
+        const input = document.createElement('input');
+        input.type = 'text';
+
+        const firstChild = todoDiv.firstElementChild;
+        input.value = firstChild.innerText;
+        input.className = 'todo-input';
+
+        firstChild.before(input);
+        firstChild.remove();
+
+        clickedEl.className = 'save';
+        // console.log(firstChild.innerText);
+    }else if(clickedEl.className == 'save'){
+        clickedEl.innerHTML = '<i class="fas fa-edit"></i>';
+        const firstChild = todoDiv.firstElementChild;
+        const li = document.createElement('li');
         
+        li.innerText = firstChild.value;
+        li.className = 'todo-item';
+
+        firstChild.before(li);
+        firstChild.remove();
+
+        clickedEl.className = 'edit';
     }
     
     
@@ -137,9 +169,8 @@ function checkList(){
         
         // formEl.after(p);
         todoContainer.insertBefore(p, todoListul);
-        
     }else{ 
-
+        // ! Remove the success message after adding a new task
         if(todoContainer.firstElementChild.className == 'finish-msg'){
             const p = document.querySelector('.finish-msg');
             let flag = true;
@@ -152,11 +183,13 @@ function checkList(){
                 flag = false;
             });
         }
-
     }
 }
 
 checkList();
+
+
+
 
 
 // todo Write Your Javascript Code here

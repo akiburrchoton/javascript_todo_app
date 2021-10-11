@@ -28,17 +28,16 @@ form {
     justify-content: center;
     align-items: center;
 }
-
-form input,
+.todo-input,
 form button {
     font-family: 'Poppins', sans-serif;
-    padding: 15px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 16px;
     border: none;
     background: white;
 }
 
-form input:focus,
+.todo-input:focus,
 form button:focus {
     outline: none;
 }
@@ -89,8 +88,9 @@ form button:hover {
 }
 
 .trash,
-.check {
-    background: rgb(233, 68, 53);
+.check,
+.edit,
+.save {
     color: white;
     border: none;
     padding: 10px;
@@ -104,9 +104,20 @@ form button:hover {
 .check {
     background: rgb(31, 223, 143);
 }
+.trash {
+    background: rgb(233, 68, 53);
+}
+.edit {
+    background: rgb(82, 91, 102);
+}
+.save {
+    background: rgb(35, 117, 224);
+}
 
 .trash:focus,
-.check:focus {
+.check:focus,
+.edit:focus,
+.save:focus {
     outline: none;
 }
 
@@ -118,9 +129,19 @@ form button:hover {
     background: rgb(255, 253, 250);
     color: rgb(31, 223, 143);
 }
+.edit:hover {
+    background: rgb(255, 253, 250);
+    color: rgb(82, 91, 102);
+}
+.save:hover {
+    background: rgb(255, 253, 250);
+    color: rgb(35, 117, 224);
+}
 
 .fa-trash,
-.fa-check {
+.fa-check,
+.fa-edit,
+.fa-save {
     pointer-events: none;
 }
 
