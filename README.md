@@ -13,3 +13,6 @@ Date - 09.10.2021
 - Show success message if there is no task remaining
 - Show error message user tries to add an empty task 
 
+Date - 11.11.2021
+- Edit a Task
+- Save a Task
